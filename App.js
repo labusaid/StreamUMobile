@@ -7,43 +7,110 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
+import {ThemeProvider, Text, Input, Icon, Button, Image} from 'react-native-elements';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+const currentPlatform = Platform.select({
+    ios: 'ios',
+    android: 'android',
 });
+
+const theme = {
+    Text: {
+        h1Style: {
+            fontSize: 40,
+            textAlign: 'center',
+            margin: 10,
+        },
+        style: {
+            color: 'white',
+        },
+    },
+    Button: {
+        buttonStyle: {
+            borderRadius: 50,
+        }
+    }
+};
 
 type Props = {};
 export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <ThemeProvider theme={theme}>
+                <View style={styles.container}>
+                    <Image
+                        source={require('./img/logo_white.png')}
+                        style={{width: 200, height: 200}}
+                    />
+                    <Text h1 h1Style={{marginTop: 0}}>StreamU</Text>
+                    {/*Username*/}
+                    <Input
+                        leftIcon={{
+                            type: 'font-awesome',
+                            name: 'envelope-o',
+                            color: 'white',
+                        }}
+                        leftIconContainerStyle={{marginRight: 10}}
+                        placeholder="Email"
+                        placeholderTextColor='grey'
+                        inputStyle={{color: 'white'}}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        keyboardType="email-address"
+                        returnKeyType="next"
+                        onSubmitEditing={() => {
+                            this.password2Input.focus();
+                        }}
+                    />
+                    {/*Password*/}
+                    <Input
+                        leftIcon={{
+                            type: 'font-awesome',
+                            name: 'lock',
+                            color: 'white',
+                        }}
+                        leftIconContainerStyle={{paddingHorizontal: 4.2, marginRight: 10}}
+                        placeholder="Password"
+                        placeholderTextColor='grey'
+                        inputStyle={{color: 'white'}}
+                        autoCapitalize="none"
+                        secureTextEntry={true}
+                        autoCorrect={false}
+                        keyboardType="default"
+                        returnKeyType="done"
+                        ref={input => (this.password2Input = input)}
+                    />
+                    <Button
+                        title="Sign In"
+                        onPress={console.log("sign in pressed")}
+                        containerStyle={{margin: 20, width: 300}}
+                    />
+                    <Text>OR</Text>
+                    <Button
+                        title="Sign in with Twitch"
+                        icon={{
+                            name: 'twitch',
+                            type: 'font-awesome',
+                            size: 15,
+                            color: 'white',
+                        }}
+                        iconLeft
+                        iconContainerStyle={{marginHorizontal: 10}}
+                        containerStyle={{margin: 20, width: 300}}
+                    />
+                </View>
+            </ThemeProvider>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#555555',
+    },
 });
