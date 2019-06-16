@@ -40,12 +40,14 @@ export default class App extends Component<Props> {
         return (
             <ThemeProvider theme={theme}>
                 <View style={styles.container}>
+                    {/*Logo*/}
                     <Image
                         source={require('./img/logo_white.png')}
                         style={{width: 200, height: 200}}
                     />
+                    {/*Name*/}
                     <Text h1 h1Style={{marginTop: 0}}>StreamU</Text>
-                    {/*Username*/}
+                    {/*Email*/}
                     <Input
                         leftIcon={{
                             type: 'font-awesome',
@@ -100,6 +102,18 @@ export default class App extends Component<Props> {
                         iconContainerStyle={{marginHorizontal: 10}}
                         containerStyle={{margin: 20, width: 300}}
                     />
+                    <View style={styles.cornerFlex}>
+                        <Button
+                            title="Forgot Details?"
+                            titleStyle={{color: 'white'}}
+                            type='clear'
+                        />
+                        <Button
+                            title="Create Account"
+                            titleStyle={{color: 'white'}}
+                            type='clear'
+                        />
+                    </View>
                 </View>
             </ThemeProvider>
         );
@@ -112,5 +126,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#555555',
+    },
+    cornerFlex: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#555555',
+        width: 300,
     },
 });
