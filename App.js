@@ -6,16 +6,19 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
 import {ThemeProvider, Text, Input, Icon, Button, Image} from 'react-native-elements';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
+//Platform specific code example
 const currentPlatform = Platform.select({
     ios: 'ios',
     android: 'android',
 });
 
+//Theme defaults
 const theme = {
     Text: {
         h1Style: {
@@ -34,8 +37,8 @@ const theme = {
     }
 };
 
-type Props = {};
-export default class App extends Component<Props> {
+//Login screen
+class LoginScreen extends React.Component {
     render() {
         return (
             <ThemeProvider theme={theme}>
@@ -120,6 +123,32 @@ export default class App extends Component<Props> {
     }
 }
 
+//Home screen
+class HomeScreen extends React.Component {
+    render() {
+        return (
+            <ThemeProvider theme={theme}>
+                <View style={styles.container}>
+                </View>
+            </ThemeProvider>
+        );
+    }
+}
+
+//Navigation definitions
+const AppNavigator = createStackNavigator({
+    Login: {
+        screen: LoginScreen
+    },
+    Home: {
+        screen: HomeScreen
+    },
+});
+
+//App export
+export default createAppContainer(AppNavigator);
+
+//Stylesheet
 const styles = StyleSheet.create({
     container: {
         flex: 1,
